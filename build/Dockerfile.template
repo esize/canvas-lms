@@ -74,6 +74,9 @@ RUN mkdir -p /etc/apt/keyrings \
   && rm -rf /var/lib/apt/lists/* \
   && mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0
 
+RUN useradd -ms /bin/bash docker || usermod -aG sudo docker
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 RUN gem install bundler --no-document -v 2.5.10 \
   && find $GEM_HOME ! -user docker | xargs chown docker:docker
 RUN npm install -g npm@9.8.1 && npm cache clean --force
