@@ -122,7 +122,7 @@ Docker Compose comes bundled with Docker Desktop. There are no additional steps 
 
 ### Arch Linux
 
-Install docker-compose from the AUR using your preferred method.  For example with aura:
+Install docker compose from the AUR using your preferred method.  For example with aura:
 
 ```
 aura -A docker-compose
@@ -130,10 +130,10 @@ aura -A docker-compose
 
 ### Fedora
 
-In Fedora 22 and later, docker-compose is in the repos:
+In Fedora 22 and later, docker compose is in the repos:
 
 ```
-$ dnf install docker-compose
+$ dnf install docker compose
 ```
 
 ### Ubuntu and others
@@ -141,5 +141,5 @@ $ dnf install docker-compose
 If you have [python pip](https://en.wikipedia.org/wiki/Pip_(package_manager)) installed, you can use it to install docker-compose:
 
 ```
-$ pip install docker-compose
+$ pip install docker compose
 ```

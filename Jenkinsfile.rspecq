@@ -77,12 +77,12 @@ def computeTestCount() {
 
   sh(script: 'build/new-jenkins/docker-compose-build-up.sh', label: 'Start Containers')
 
-  sh(script: "docker-compose exec -T canvas bundle exec rspec --dry-run \
+  sh(script: "${DOCKER_COMMAND} exec -T canvas bundle exec rspec --dry-run \
                                       --require './spec/formatters/node_count_formatter.rb' \
                                       --format NodeCountRecorder \
                                       --out formatter_out.txt --pattern ${specUnique.join(',')}", label: 'Get Node Count')
 
-  def formatterResult = sh(script: 'docker-compose exec -T canvas cat formatter_out.txt', returnStdout: true).trim().split(" ")
+  def formatterResult = sh(script: '${DOCKER_COMMAND} exec -T canvas cat formatter_out.txt', returnStdout: true).trim().split(" ")
 
   def nodeTotal = formatterResult[0].toInteger()
   def specTotal = formatterResult[1].toInteger()

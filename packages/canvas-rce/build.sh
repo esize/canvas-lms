@@ -1,23 +1,23 @@
 #!/bin/bash
 export COMPOSE_FILE=./docker-compose.yml
 
-docker-compose build
-docker-compose up -d
+${DOCKER_COMMAND} build
+${DOCKER_COMMAND} up -d
 
 # run unit tests
-docker-compose exec -T module npm run test-cov
+${DOCKER_COMMAND} exec -T module npm run test-cov
 unit_status=$?
-docker cp $(docker-compose ps -q module):/usr/src/app/coverage coverage
+docker cp $(${DOCKER_COMMAND} ps -q module):/usr/src/app/coverage coverage
 
 # check code formatting
-docker-compose exec -T module npm run fmt:check
+${DOCKER_COMMAND} exec -T module npm run fmt:check
 fmt_status=$?
 
 # lint all the things
-docker-compose exec -T module npm run lint
+${DOCKER_COMMAND} exec -T module npm run lint
 lint_status=$?
 
-docker-compose stop
+${DOCKER_COMMAND} stop
 
 # jenkins uses the exit code to decide whether you passed or not
 ((unit_status)) && exit $unit_status

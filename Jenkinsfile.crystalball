@@ -64,7 +64,7 @@ def postFn() {
   )
 
   sh """
-    docker-compose run -v \$(pwd)/\$LOCAL_WORKDIR/tmp/:/tmp \
+    ${DOCKER_COMMAND} run -v \$(pwd)/\$LOCAL_WORKDIR/tmp/:/tmp \
     -v \$(pwd)/\$LOCAL_WORKDIR/build:/usr/src/app/build \
     --name crystalball-parser \
     canvas bash -c 'ruby build/new-jenkins/crystalball_merge_coverage.rb "/tmp/*/crystalball/"'
@@ -76,7 +76,7 @@ def postFn() {
   def message = "<$env.BUILD_URL/testReport|Latest Crystalball Map Generated> - <${getResultsHTMLUrl()}|Map>\n"
   try {
     def mapSpecInfo = sh(script: """
-      docker-compose run --rm \
+      ${DOCKER_COMMAND} run --rm \
         -v \$(pwd)/\$LOCAL_WORKDIR/crystalball_map.yml/:/usr/src/app/crystalball_map.yml \
         -v \$(pwd)/\$LOCAL_WORKDIR/build:/usr/src/app/build \
         -v \$(pwd)/\$LOCAL_WORKDIR/gems/plugins/:/usr/src/app/gems/plugins \

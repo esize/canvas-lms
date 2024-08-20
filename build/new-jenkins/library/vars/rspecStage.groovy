@@ -164,7 +164,7 @@ def runRspecqSuite() {
       cancel_node(SUCCESS_NOT_BUILT, 'Node cancelled!')
       return
     }
-    sh(script: 'docker-compose exec -T -e ENABLE_AXE_SELENIUM \
+    sh(script: '${DOCKER_COMMAND} exec -T -e ENABLE_AXE_SELENIUM \
                                        -e SENTRY_DSN \
                                        -e RSPECQ_UPDATE_TIMINGS \
                                        -e JOB_NAME \
@@ -201,7 +201,7 @@ def runRspecqSuite() {
 
 def runReporter() {
   try {
-    sh(script: "docker-compose exec -e SENTRY_DSN -T canvas bundle exec rspecq \
+    sh(script: "${DOCKER_COMMAND} exec -e SENTRY_DSN -T canvas bundle exec rspecq \
                                             --build=${JOB_NAME}_build${BUILD_NUMBER} \
                                             --queue-wait-timeout 120 \
                                             --redis-url $RSPECQ_REDIS_URL \

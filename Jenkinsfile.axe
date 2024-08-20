@@ -118,7 +118,7 @@ pipeline {
 
         withEnv(['COMPOSE_FILE=docker-compose.new-jenkins.yml']) {
           sh """
-            docker-compose run -v \$(pwd)/\$LOCAL_WORKDIR/tmp/:/tmp \
+            ${DOCKER_COMMAND} run -v \$(pwd)/\$LOCAL_WORKDIR/tmp/:/tmp \
             --name stormbreaker-results canvas bash -c \
             "bundle install; bundle exec rake stormbreaker:combine_results['/tmp/*_rspec_results/**']"
           """

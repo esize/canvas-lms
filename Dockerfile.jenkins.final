@@ -8,9 +8,9 @@ RUN \
   --mount=type=bind,from=local/cache-helper,source=/tmp/dst,target=/cache-helper \
   tar --no-same-owner -xf /cache-helper/webpack-runner-vendor.tar -C ${APP_HOME} && \
   if [ -n "$(tar tf /cache-helper/webpack-runner-vendor.tar)" ]; then bundle config --global frozen false ; fi && \
-  cp -v docker-compose/config/redis.yml config && \
-  cp -v docker-compose/config/selenium.yml config/ && \
-  cp -vR docker-compose/config/new-jenkins/* config/ && \
+  cp -v ${DOCKER_COMMAND}/config/redis.yml config && \
+  cp -v ${DOCKER_COMMAND}/config/selenium.yml config/ && \
+  cp -vR ${DOCKER_COMMAND}/config/new-jenkins/* config/ && \
   cp -v config/delayed_jobs.yml.example config/delayed_jobs.yml && \
   cp -v config/domain.yml.example config/domain.yml && \
   cp -v config/external_migration.yml.example config/external_migration.yml && \

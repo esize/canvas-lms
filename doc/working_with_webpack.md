@@ -76,7 +76,7 @@ To run all the tests, you can run:
 If you are using docker and want to run them all in a headless container you can 
 do so with with:
 
-`docker-compose run --rm js-tests`
+`docker compose run --rm js-tests`
 
 which spools up the "js-tests" container specified in docker-compose.yml, which
 has an entry point that knows how to kick off karma with a headless runner.
