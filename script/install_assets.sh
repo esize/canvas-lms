@@ -9,6 +9,8 @@ function bundle_config_and_install() {
   bundle config --global build.nokogiri --use-system-libraries &&
   bundle config --global build.ffi --enable-system-libffi &&
   mkdir -p /home/docker/.bundle &&
+  sudo chown -R docker:docker /usr/src/app
+  sudo chmod -R o+rwx .
   bundle install --jobs $(nproc)
 }
 
